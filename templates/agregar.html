@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agregar Producto</title>
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom, #e0f7fa, #ffffff);
+    margin: 0;
+    padding: 0;
+    color: #004d40;
+}
+.container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+}
+h1 {
+    color: #00796b;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px #b2dfdb;
+}
+.form-box {
+    background: #ffffff;
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+input {
+    width: 90%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #00796b;
+}
+input:focus { border-color: #004d40; }
+button, .btn {
+    background: #00796b;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s, transform 0.2s;
+}
+button:hover, .btn:hover { background: #004d40; transform: scale(1.05); }
+.flash {
+    background: #a5d6a7;
+    color: #004d40;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+a {
+    color: #00796b;
+    text-decoration: none;
+    font-weight: bold;
+}
+a:hover { color: #004d40; }
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: left;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Agregar Nuevo Producto</h1>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash">{{ messages[0] }}</div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="form-box">
+        <form method="POST">
+            <label>Nombre del producto</label>
+            <input type="text" name="nombre" placeholder="Nombre del producto" required>
+
+            <label>Precio</label>
+            <input type="text" name="precio" placeholder="Precio del producto" required>
+
+            <label>Fecha de elaboración</label>
+            <input type="date" name="fecha_elaboracion" placeholder="Fecha en que se elaboró el producto" required>
+
+            <label>Fecha de caducidad</label>
+            <input type="date" name="fecha_caducidad" placeholder="Fecha hasta la cual es válido el producto" required>
+
+            <label>Quién hizo el producto</label>
+            <input type="text" name="quien_hizo" placeholder="Nombre del productor" required>
+
+            <label>Imagen (URL)</label>
+            <input type="text" name="imagen" placeholder="URL de la imagen">
+
+            <button type="submit">Agregar</button>
+        </form>
+    </div>
+
+    <a href="{{ url_for('productos_view') }}" class="btn">Volver a productos</a>
+</div>
+</body>
+</html>
