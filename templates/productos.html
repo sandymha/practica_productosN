@@ -88,6 +88,9 @@ a.logout:hover { color: #004d40; }
                 <p>Elaboración: {{ producto.fecha_elaboracion }}</p>
                 <p>Caducidad: {{ producto.fecha_caducidad }}</p>
                 <p>Hecho por: {{ producto.quien_hizo }}</p>
+                {% if producto.descripcion %}
+                    <p>Descripción: {{ producto.descripcion }}</p>
+                {% endif %}
             </div>
         {% endfor %}
     </div>
