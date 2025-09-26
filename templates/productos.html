@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Productos</title>
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom, #ffffff, #e0f7fa);
+    margin: 0;
+    padding: 0;
+    color: #004d40;
+}
+.container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+}
+h1 {
+    color: #00796b;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px #b2dfdb;
+}
+a.btn {
+    display: inline-block;
+    background: #00796b;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-bottom: 20px;
+    transition: background 0.3s, transform 0.2s;
+}
+a.btn:hover { background: #004d40; transform: scale(1.05); }
+a.logout {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #00796b;
+}
+a.logout:hover { color: #004d40; }
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+.producto {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: left;
+}
+.producto:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
+.producto img {
+    width: 100%;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+.producto h3 {
+    margin: 0 0 5px;
+    color: #00796b;
+}
+.producto p {
+    margin: 3px 0;
+    color: #004d40;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Productos Disponibles</h1>
+    <p>Bienvenido, {{ usuario }} | <a href="{{ url_for('logout') }}" class="logout">Cerrar sesión</a></p>
+    <a href="{{ url_for('agregar_producto') }}" class="btn">Agregar Producto</a>
+
+    <div class="productos-grid">
+        {% for producto in productos %}
+            <div class="producto">
+                {% if producto.imagen %}
+                    <img src="{{ producto.imagen }}" alt="{{ producto.nombre }}">
+                {% endif %}
+                <h3>{{ producto.nombre }}</h3>
+                <p>Precio: {{ producto.precio }}</p>
+                <p>Elaboración: {{ producto.fecha_elaboracion }}</p>
+                <p>Caducidad: {{ producto.fecha_caducidad }}</p>
+                <p>Hecho por: {{ producto.quien_hizo }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</body>
+</html>
