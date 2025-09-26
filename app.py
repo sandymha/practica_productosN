@@ -66,6 +66,7 @@ def agregar_producto():
         fecha_caducidad = request.form.get("fecha_caducidad")
         quien_hizo = request.form.get("quien_hizo")
         imagen = request.form.get("imagen")
+        descripcion = request.form.get("descripcion")  # <-- nuevo campo
 
         productos.append({
             "nombre": nombre,
@@ -73,7 +74,8 @@ def agregar_producto():
             "fecha_elaboracion": fecha_elaboracion,
             "fecha_caducidad": fecha_caducidad,
             "quien_hizo": quien_hizo,
-            "imagen": imagen
+            "imagen": imagen,
+            "descripcion": descripcion  # <-- nuevo campo
         })
 
         with open(PRODUCT_FILE, "w") as f:
@@ -85,6 +87,11 @@ def agregar_producto():
 @app.route('/logout')
 def logout():
     session.pop('usuario', None)
+    return redirect(url_for("login"))
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
     return redirect(url_for("login"))
 
 if __name__ == "__main__":
